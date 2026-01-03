@@ -4,9 +4,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Prevod_bankoveho_uctu
 {
-    internal class Pad: Movies
+    internal class Pad
     {
-        public void Main(string[] args)
+        public void ui()
         {
             // horny lavy roh
             Console.SetCursorPosition(10, 2);
@@ -62,17 +62,17 @@ namespace Prevod_bankoveho_uctu
             Console.SetCursorPosition(50, 10);
             Console.WriteLine("Čas: ");
 
-            Console.SetCursorPosition(11, 11); 
-            Console.Write("-"); 
+            Console.SetCursorPosition(11, 11);
+            Console.Write("-");
             Console.Write(new string('-', 80));
 
-            Console.SetCursorPosition(12, 13); 
-            Console.Write("Tvoj film: "); 
-            Console.SetCursorPosition(50, 13); 
-            Console.WriteLine("Cena: "); 
-            Console.SetCursorPosition(12, 14); 
-            Console.Write("Snack: "); 
-            Console.SetCursorPosition(50, 14); 
+            Console.SetCursorPosition(12, 13);
+            Console.Write("Tvoj film: ");
+            Console.SetCursorPosition(50, 13);
+            Console.WriteLine("Cena: ");
+            Console.SetCursorPosition(12, 14);
+            Console.Write("Snack: ");
+            Console.SetCursorPosition(50, 14);
             Console.WriteLine("Cena: ");
 
             if (true)
@@ -83,30 +83,30 @@ namespace Prevod_bankoveho_uctu
                 Console.WriteLine("Cena: ");
             }
 
-            Console.SetCursorPosition(11, 15); 
-            Console.Write("-"); 
+            Console.SetCursorPosition(11, 15);
+            Console.Write("-");
             Console.Write(new string('-', 80));
 
-            Console.SetCursorPosition(12, 17); 
-            Console.Write("Celkom "); 
-            Console.SetCursorPosition(50, 17); 
+            Console.SetCursorPosition(12, 17);
+            Console.Write("Celkom ");
+            Console.SetCursorPosition(50, 17);
             Console.WriteLine("Cena: ");
 
-            Console.SetCursorPosition(11, 18); 
-            Console.Write("="); 
+            Console.SetCursorPosition(11, 18);
+            Console.Write("=");
             Console.Write(new string('=', 80));
 
-            Console.SetCursorPosition(12, 20); 
-            Console.Write("Prijaté v hotovosti "); 
-            Console.SetCursorPosition(50, 20); 
+            Console.SetCursorPosition(12, 20);
+            Console.Write("Prijaté v hotovosti ");
+            Console.SetCursorPosition(50, 20);
             Console.WriteLine("Cena: ");
 
-            Console.SetCursorPosition(12, 21); 
-            Console.Write("Vrátené zákazníkovi "); 
-            Console.SetCursorPosition(50, 21); 
+            Console.SetCursorPosition(12, 21);
+            Console.Write("Vrátené zákazníkovi ");
+            Console.SetCursorPosition(50, 21);
             Console.WriteLine("Cena: ");
 
-            Console.SetCursorPosition(37, 28); 
+            Console.SetCursorPosition(37, 28);
             Console.Write("Ďakujeme za vašu návštevu!");
 
 

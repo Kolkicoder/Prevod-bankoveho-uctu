@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace PolrocnyProjekt
+namespace Prevod_bankoveho_uctu
 {
     internal class User
     {
-        public void Main(string[] args)
+        public void Main()
         {
-            string inputFile = "C:\\Users\\kolku\\OneDrive\\Desktop\\Ulohy prax\\Polrocny projekt\\uzivatelske ucty.txt";
-            string outputFile = "C:\\Users\\kolku\\OneDrive\\Desktop\\Ulohy prax\\Polrocny projekt\\info. o uzivatelovi.txt";
+            string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string inputFileName = "uzivatelske ucty.txt";
+            string outputFileName = "info. o uzivatelovi.txt";
 
-            if (!File.Exists(inputFile))
-            {
-                Console.WriteLine("Súbor s používateľskými účtami neexistuje.");
-                Console.ReadKey();
-                return;
-            }
+            string inputFile = Path.Combine(folder, inputFileName);
+            string outputFile = Path.Combine(folder, outputFileName);
 
             string[] accounts = File.ReadAllLines(inputFile);
 
@@ -34,7 +31,7 @@ namespace PolrocnyProjekt
             }
 
             int choice = 0;
-                        
+
             while (true)
             {
                 Console.WriteLine("\nVyberte číslo účtu (1 - 5): ");
@@ -98,16 +95,16 @@ namespace PolrocnyProjekt
             File.AppendAllLines(outputFile, zapis);
 
             Console.WriteLine("\nÚdaje boli uložené.");
-                        
+
             while (true)
             {
                 Console.WriteLine("\nNapíšte 'moje udaje' pre zobrazenie údajov alebo 'esc' pre ukončenie.");
                 Console.Write("> ");
 
                 string prikaz = Console.ReadLine();
-                prikaz = prikaz.ToLower();
+                string prikaz1 = prikaz.ToLower();
 
-                if (prikaz == "moje udaje")
+                if (prikaz1 == "moje udaje")
                 {
                     if (File.Exists(outputFile))
                     {

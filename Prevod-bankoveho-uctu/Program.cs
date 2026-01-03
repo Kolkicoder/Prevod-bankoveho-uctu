@@ -1,10 +1,6 @@
 ﻿using Prevod_bankoveho_uctu;
 
-
-namespace Prevod_bankoveho_uctu
-{
-    internal class Program
-    {
-        
-    }
-}
+Movies movies = new Movies();
+movies.Main();
+Cinema cinema = new Cinema();
+cinema.CinemaInfo();
