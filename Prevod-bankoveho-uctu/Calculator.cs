@@ -1,37 +1,32 @@
-﻿using Microsoft.VisualBasic;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection.Metadata;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
-namespace Prevod_bankoveho_uctu
+namespace BankAccountTransfer
 {
     internal class Calculator : Movies
     {
-        public decimal VypocitajSnacky(Dictionary<string, int> snacky)
+        public decimal CalculateSnacks(Dictionary<string, int> snacks)
         {
-            decimal suma = 0;
+            decimal total = 0;
 
-            foreach (var snack in snacky)
+            foreach (var snack in snacks)
             {
                 if (snack.Key == "Popcorn")
-                    suma += snack.Value * 2m;
+                    total += snack.Value * 2m;
                 else if (snack.Key == "Nachos")
-                    suma += snack.Value * 2.5m;
-                else if (snack.Key == "Sladkosti")
-                    suma += snack.Value * 1m;
-                else if (snack.Key == "Nápoje")
-                    suma += snack.Value * 2.5m;
+                    total += snack.Value * 2.5m;
+                else if (snack.Key == "Sweets")
+                    total += snack.Value * 1m;
+                else if (snack.Key == "Drinks")
+                    total += snack.Value * 2.5m;
             }
 
-            return suma;
+            return total;
         }
 
-        public decimal VypocitajSpolu(decimal cenaFilmu, Dictionary<string, int> snacky)
+        public decimal CalculateTotal(decimal moviePrice, Dictionary<string, int> snacks)
         {
-            return cenaFilmu + VypocitajSnacky(snacky);
+            return moviePrice + CalculateSnacks(snacks);
         }
     }
 }

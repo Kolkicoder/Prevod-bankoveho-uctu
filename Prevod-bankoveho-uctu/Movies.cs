@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Prevod_bankoveho_uctu;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
+using System.IO;
+using System.Threading.Channels;
 
-namespace Prevod_bankoveho_uctu
+namespace BankAccountTransfer
 {
     internal class Movies
     {
@@ -13,18 +12,18 @@ namespace Prevod_bankoveho_uctu
         {
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string fileName = "Movie.txt";
-            string fileLocale = Path.Combine(folder, fileName);
+            string filePath = Path.Combine(folder, fileName);
 
-            string[] movies = File.ReadAllLines(fileLocale);
+            string[] movies = File.ReadAllLines(filePath);
 
             if (movies.Length == 0)
             {
-                Console.WriteLine("Súbor je prázdny.");
+                Console.WriteLine("The file is empty.");
                 Console.ReadKey();
                 return;
             }
 
-            Console.WriteLine("Dostupné filmy:");
+            Console.WriteLine("Available movies:");
             for (int i = 0; i < movies.Length; i++)
             {
                 Console.WriteLine((i + 1) + ". " + movies[i]);
@@ -34,18 +33,18 @@ namespace Prevod_bankoveho_uctu
 
             while (true)
             {
-                Console.Write("\nVyberte číslo filmu (1 - 20): ");
+                Console.Write("\nSelect a movie number (1 - 20): ");
                 string input = Console.ReadLine();
 
                 if (!int.TryParse(input, out choice))
                 {
-                    Console.WriteLine("Nesprávny film, skúste to znova.");
+                    Console.WriteLine("Invalid movie, please try again.");
                     continue;
                 }
 
-                if (choice < 01 || choice > 20)
+                if (choice < 1 || choice > 20)
                 {
-                    Console.WriteLine("Nesprávny film, skúste to znova.");
+                    Console.WriteLine("Invalid movie, please try again.");
                     continue;
                 }
 
@@ -55,40 +54,40 @@ namespace Prevod_bankoveho_uctu
             string[] movieData = movies[choice - 1].Split(';');
 
             string selectedMovie = movieData[0];
-            decimal cenaFilmu = decimal.Parse(movieData[1]);
+            decimal moviePrice = decimal.Parse(movieData[1]);
 
-            Console.WriteLine("Vybrali ste film: " + selectedMovie);
-            Console.WriteLine("Cena filmu: " + cenaFilmu + " €");
+            Console.WriteLine("You selected the movie: " + selectedMovie);
+            Console.WriteLine("Movie price: " + moviePrice + " €");
 
-            Console.WriteLine("Ak by ste chceli, tak ponúkame aj snacky.");
-            Console.WriteLine("Pre snack zadajte 'A', pre žiadny snack zadajte 'N'.");
+            Console.WriteLine("If you want, we also offer snacks.");
+            Console.WriteLine("Enter 'A' for a snack, or 'N' for no snack.");
             Console.Write("> ");
 
-            decimal num1 = 2;
-            decimal num2 = 2.5m;
-            decimal num3 = 1;
-            decimal num4 = 2.5m;
+            decimal price1 = 2;
+            decimal price2 = 2.5m;
+            decimal price3 = 1;
+            decimal price4 = 2.5m;
 
-            string input_ = Console.ReadLine();
+            string inputSnack = Console.ReadLine();
             Dictionary<string, int> selectedSnacks = new Dictionary<string, int>();
 
-            if (input_.ToUpper() == "A")
+            if (inputSnack.ToUpper() == "A")
             {
-                Console.WriteLine("Ponúkame tieto snacky: ");
-                Console.WriteLine($"1. Popcorn - {num1}");
-                Console.WriteLine($"2. Nachos - {num2}");
-                Console.WriteLine($"3. Sladkosti - {num3}");
-                Console.WriteLine($"4. Nápoje - Coca Cola, Nestea, Minerálka - {num4}");
-                Console.WriteLine($"Zadajte číslo snacku alebo napíšte 'to je všetko'.");
+                Console.WriteLine("We offer these snacks:");
+                Console.WriteLine($"1. Popcorn - {price1}");
+                Console.WriteLine($"2. Nachos - {price2}");
+                Console.WriteLine($"3. Sweets - {price3}");
+                Console.WriteLine($"4. Drinks - Coca Cola, Nestea, Mineral Water - {price4}");
+                Console.WriteLine("Enter the snack number or type 'that's all'.");
 
                 while (true)
                 {
                     Console.Write("> ");
                     string snackChoice = Console.ReadLine();
 
-                    if (snackChoice.ToLower() == "to je všetko")
+                    if (snackChoice.ToLower() == "that's all")
                     {
-
+                        break;
                     }
 
                     string snackName = "";
@@ -102,17 +101,17 @@ namespace Prevod_bankoveho_uctu
                             snackName = "Nachos";
                             break;
                         case "3":
-                            snackName = "Sladkosti";
+                            snackName = "Sweets";
                             break;
                         case "4":
-                            snackName = "Nápoje";
+                            snackName = "Drinks";
                             break;
                         default:
-                            Console.WriteLine("Neplatný výber, skúste znova.");
+                            Console.WriteLine("Invalid choice, please try again.");
                             continue;
                     }
 
-                    Console.Write("Zadajte počet kusov: ");
+                    Console.Write("Enter quantity: ");
                     if (int.TryParse(Console.ReadLine(), out int count) && count > 0)
                     {
                         if (selectedSnacks.ContainsKey(snackName))
@@ -124,46 +123,45 @@ namespace Prevod_bankoveho_uctu
                             selectedSnacks.Add(snackName, count);
                         }
 
-                        Console.WriteLine($"{snackName} – pridané {count} ks.");
-
+                        Console.WriteLine($"{snackName} – added {count} pcs.");
                     }
                     else
                     {
-                        Console.WriteLine("Neplatný počet.");
-
+                        Console.WriteLine("Invalid quantity.");
                     }
                 }
             }
             else
             {
-                Console.WriteLine("Rozumiem, žiadny snack.");
-
-                Console.WriteLine("\nVybrali ste si tieto snacky:");
-
-                if (selectedSnacks.Count == 0)
-                {
-                    Console.WriteLine("Žiadne snacky.");
-                }
-                else
-                {
-                    foreach (var snack in selectedSnacks)
-                    {
-                        Console.WriteLine($"- {snack.Key}: {snack.Value} ks");
-                    }
-                }
-
-                Calculator kalkulacka = new Calculator();
-                decimal cenaSnackov = kalkulacka.VypocitajSnacky(selectedSnacks);
-                decimal cenaSpolu = kalkulacka.VypocitajSpolu(cenaFilmu, selectedSnacks);
-
-                Console.WriteLine("\n--- REKAPITULÁCIA ---");
-                Console.WriteLine("Film: " + selectedMovie);
-                Console.WriteLine("Cena filmu: " + cenaFilmu + " €");
-                Console.WriteLine("Cena snackov: " + cenaSnackov + " €");
-                Console.WriteLine("CELKOM NA ZAPLATENIE: " + cenaSpolu + " €");
-
-                Console.ReadKey();
+                Console.WriteLine("Okay, no snacks.");
             }
+
+            Console.WriteLine("\nYou selected these snacks:");
+
+            if (selectedSnacks.Count == 0)
+            {
+                Console.WriteLine("No snacks.");
+            }
+            else
+            {
+                foreach (var snack in selectedSnacks)
+                {
+                    Console.WriteLine($"- {snack.Key}: {snack.Value} pcs");
+                }
+            }
+
+            Calculator calculator = new Calculator();
+            decimal snacksPrice = calculator.CalculateSnacks(selectedSnacks);
+            decimal totalPrice = calculator.CalculateTotal(moviePrice, selectedSnacks);
+
+            Console.WriteLine("\n--- SUMMARY ---");
+            Console.WriteLine("Movie: " + selectedMovie);
+            Console.WriteLine("Movie price: " + moviePrice + " €");
+            Console.WriteLine("Snacks price: " + snacksPrice + " €");
+            Console.WriteLine("TOTAL TO PAY: " + totalPrice + " €");
+
+            Console.ReadKey();
         }
     }
 }
+

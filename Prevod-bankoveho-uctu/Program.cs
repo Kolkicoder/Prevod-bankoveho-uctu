@@ -1,6 +1,13 @@
-﻿using Prevod_bankoveho_uctu;
+﻿using BankAccountTransfer;
 
-Movies movies = new Movies();
-movies.Main();
-Cinema cinema = new Cinema();
-cinema.CinemaInfo();
+class Program
+{
+    static void Main()
+    {        
+        Movies movies = new Movies();
+        movies.Main();
+                
+        Cinema cinema = new Cinema();
+        cinema.CinemaInfo();
+    }
+}

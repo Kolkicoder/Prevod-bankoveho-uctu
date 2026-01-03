@@ -1,17 +1,18 @@
 ﻿
-namespace Prevod_bankoveho_uctu
+namespace BankAccountTransfer
 {
     internal class Cinema
     {
         public void CinemaInfo()
         {
-            Console.WriteLine("Toto je info o Kine!");
-            string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string fileName = "Kino - ucet.txt";
-            string filePath = Path.Combine(folder, fileName);
-            string text = File.ReadAllText(filePath);
-            Console.WriteLine($"Cislo uctu kina - {text}");
+            Console.WriteLine("This is information about the Cinema!");
 
+            string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string fileName = "Cinema - account.txt";
+            string filePath = Path.Combine(folder, fileName);
+
+            string text = File.ReadAllText(filePath);
+            Console.WriteLine($"Cinema account number - {text}");
 
             Console.ReadKey();
         }
