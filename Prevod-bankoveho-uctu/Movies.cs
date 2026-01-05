@@ -6,7 +6,7 @@ using System.Threading.Channels;
 
 namespace BankAccountTransfer
 {
-    internal class Movies
+    internal class Movies: Pad
     {
         public void Main()
         {
@@ -154,11 +154,14 @@ namespace BankAccountTransfer
             decimal snacksPrice = calculator.CalculateSnacks(selectedSnacks);
             decimal totalPrice = calculator.CalculateTotal(moviePrice, selectedSnacks);
 
-            Console.WriteLine("\n--- ZHRNUTIE ---");
-            Console.WriteLine("Film: " + selectedMovie);
-            Console.WriteLine("Cena filmu: " + moviePrice + " €");
-            Console.WriteLine("Cena občerstvenia: " + snacksPrice + " €");
-            Console.WriteLine("CELKOM NA ZAPLATENIE: " + totalPrice + " €");
+            Pad pad = new Pad();
+
+            pad.Movie = selectedMovie;
+            pad.MoviePrice = moviePrice;
+            pad.Snacks = selectedSnacks;
+            pad.TotalPrice = totalPrice;
+
+            pad.PrintReceipt();
 
             Console.ReadKey();
         }

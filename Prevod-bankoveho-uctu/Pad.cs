@@ -4,6 +4,51 @@ namespace BankAccountTransfer
 {
     internal class Pad
     {
+        public string Movie { get; set; }
+        public decimal MoviePrice { get; set; }
+        public Dictionary<string, int> Snacks { get; set; }
+        public decimal SnacksPrice { get; set; }
+        public decimal TotalPrice { get; set; }
+
+        public void PrintReceipt()
+        {
+            Console.Clear();
+            ui();
+
+            int row = 13;
+
+            Console.SetCursorPosition(12, row);
+            Console.Write("Film: " + Movie);
+            Console.SetCursorPosition(50, row);
+            Console.Write(MoviePrice + " €");
+            row++;
+
+            if (Snacks != null && Snacks.Count > 0)
+            {
+                foreach (var snack in Snacks)
+                {
+                    Console.SetCursorPosition(12, row);
+                    Console.Write("Občerstvenie: " + snack.Key + " (" + snack.Value + " ks)");
+                    row++;
+                }
+            }
+            else
+            {
+                Console.SetCursorPosition(12, row);
+                Console.Write("Bez občerstvenia");
+                row++;
+            }
+
+            Console.SetCursorPosition(11, row);
+            Console.Write(new string('-', 80));
+            row++;
+
+            Console.SetCursorPosition(12, row);
+            Console.Write("Spolu");
+            Console.SetCursorPosition(50, row);
+            Console.Write(TotalPrice + " €");
+        }
+
         public void ui()
         {
             // horný ľavý roh
