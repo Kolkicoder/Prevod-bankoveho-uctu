@@ -15,9 +15,9 @@ namespace BankAccountTransfer
                     total += snack.Value * 2m;
                 else if (snack.Key == "Nachos")
                     total += snack.Value * 2.5m;
-                else if (snack.Key == "Sweets")
+                else if (snack.Key == "Sladkosti")
                     total += snack.Value * 1m;
-                else if (snack.Key == "Drinks")
+                else if (snack.Key == "Nápoje")
                     total += snack.Value * 2.5m;
             }
 

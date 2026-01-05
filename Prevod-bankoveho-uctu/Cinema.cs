@@ -5,14 +5,14 @@ namespace BankAccountTransfer
     {
         public void CinemaInfo()
         {
-            Console.WriteLine("This is information about the Cinema!");
+            Console.WriteLine("Toto sú informácie o kine!");
 
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string fileName = "Cinema - account.txt";
             string filePath = Path.Combine(folder, fileName);
 
             string text = File.ReadAllText(filePath);
-            Console.WriteLine($"Cinema account number - {text}");
+            Console.WriteLine($"Číslo účtu kina - {text}");
 
             Console.ReadKey();
         }

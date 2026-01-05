@@ -20,12 +20,12 @@ namespace BankAccountTransfer
 
             if (accounts.Length == 0)
             {
-                Console.WriteLine("The file is empty.");
+                Console.WriteLine("Súbor je prázdny.");
                 Console.ReadKey();
                 return;
             }
 
-            Console.WriteLine("Available bank accounts:");
+            Console.WriteLine("Dostupné bankové účty:");
             for (int i = 0; i < accounts.Length; i++)
             {
                 Console.WriteLine((i + 1) + ". " + accounts[i]);
@@ -35,19 +35,19 @@ namespace BankAccountTransfer
 
             while (true)
             {
-                Console.WriteLine("\nSelect an account number (1 - 5): ");
+                Console.WriteLine("\nVyberte číslo účtu (1 - 5): ");
                 Console.Write("> ");
                 string input = Console.ReadLine();
 
                 if (!int.TryParse(input, out choice))
                 {
-                    Console.WriteLine("Invalid account, please try again.");
+                    Console.WriteLine("Neplatný účet, skúste znova.");
                     continue;
                 }
 
                 if (choice < 1 || choice > 5)
                 {
-                    Console.WriteLine("Invalid account, please try again.");
+                    Console.WriteLine("Neplatný účet, skúste znova.");
                     continue;
                 }
 
@@ -55,59 +55,59 @@ namespace BankAccountTransfer
             }
 
             string selectedAccount = accounts[choice - 1];
-            Console.WriteLine("You selected account: " + selectedAccount);
+            Console.WriteLine("Vybrali ste účet: " + selectedAccount);
 
-            Console.WriteLine("Enter CVC: ");
+            Console.WriteLine("Zadajte CVC: ");
             Console.Write("> ");
             string cvc = Console.ReadLine();
 
-            Console.WriteLine("Enter account balance (EUR): ");
+            Console.WriteLine("Zadajte zostatok na účte (EUR): ");
             Console.Write("> ");
             string balanceText = Console.ReadLine();
 
-            Console.WriteLine("Enter e-mail: ");
+            Console.WriteLine("Zadajte e-mail: ");
             Console.Write("> ");
             string email = Console.ReadLine();
 
             if (cvc == "" || balanceText == "" || email == "")
             {
-                Console.WriteLine("You must fill in all information.");
+                Console.WriteLine("Musíte vyplniť všetky údaje.");
                 Console.ReadKey();
                 return;
             }
 
             if (!double.TryParse(balanceText, out double balance))
             {
-                Console.WriteLine("Balance must be a number.");
+                Console.WriteLine("Zostatok musí byť číslo.");
                 Console.ReadKey();
                 return;
             }
 
             List<string> record = new List<string>();
-            record.Add("----- USER INFORMATION -----");
-            record.Add("Account: " + selectedAccount);
+            record.Add("----- INFORMÁCIE O POUŽÍVATEĽOVI -----");
+            record.Add("Účet: " + selectedAccount);
             record.Add("CVC: " + cvc);
-            record.Add("Account balance: " + balance + " EUR");
+            record.Add("Zostatok na účte: " + balance + " EUR");
             record.Add("E-mail: " + email);
-            record.Add("Date: " + DateTime.Now);
+            record.Add("Dátum: " + DateTime.Now);
             record.Add("");
 
             File.AppendAllLines(outputFile, record);
 
-            Console.WriteLine("\nInformation has been saved.");
+            Console.WriteLine("\nInformácie boli uložené.");
 
             while (true)
             {
-                Console.WriteLine("\nType 'my info' to display information or 'esc' to exit.");
+                Console.WriteLine("\nNapíšte 'moje info' pre zobrazenie údajov alebo 'esc' pre ukončenie.");
                 Console.Write("> ");
 
                 string command = Console.ReadLine().ToLower();
 
-                if (command == "my info")
+                if (command == "moje info")
                 {
                     if (File.Exists(outputFile))
                     {
-                        Console.WriteLine("\n--- SAVED INFORMATION ---");
+                        Console.WriteLine("\n--- ULOŽENÉ INFORMÁCIE ---");
                         string[] data = File.ReadAllLines(outputFile);
                         foreach (var line in data)
                         {
@@ -116,18 +116,18 @@ namespace BankAccountTransfer
                     }
                     else
                     {
-                        Console.WriteLine("The data file does not exist.");
+                        Console.WriteLine("Súbor s údajmi neexistuje.");
                     }
                     break;
                 }
                 else if (command == "esc")
                 {
-                    Console.WriteLine("Program terminated.");
+                    Console.WriteLine("Program bol ukončený.");
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Unknown command, please try again.");
+                    Console.WriteLine("Neznámy príkaz, skúste znova.");
                 }
             }
 
